@@ -24,7 +24,7 @@ async def button_handler(update, context):
     elif query.data == "job":
         await query.message.reply_text("Чтобы разместить смену, заполни форму:\nhttps://docs.google.com/forms/d/e/1FAIpQLSey3k8gent4eHEceU4CszmDj2SNr6UKKH7UqQPwiN2xlEyqkg/viewform")
     elif query.data == "about":
-await query.message.reply_text("JOL-Ish — сервис поиска сменной подработки в Бишкеке. Найди подходящую смену или размести вакансию.\n\nПодробнее на сайте:\nhttps://sites.google.com/view/jol-ish-bishkek")
+        await query.message.reply_text("JOL-Ish — сервис поиска сменной подработки в Бишкеке. Найди подходящую смену или размести вакансию.\n\nПодробнее на сайте:\nhttps://sites.google.com/view/jol-ish-bishkek")
 app = Application.builder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CallbackQueryHandler(button_handler))
