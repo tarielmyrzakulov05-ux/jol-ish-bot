@@ -21,13 +21,13 @@ async def button_handler(update, context):
     query = update.callback_query
     await query.answer()
     if query.data == "find":
-        await query.message.reply_text("Чтобы найти смену, заполни форму:\nВСТАВЬТЕ_СЮДА_ПОЛНУЮ_ССЫЛКУ_НА_ФОРМУ_СОИСКАТЕЛЯ")
+        await query.message.reply_text("Чтобы найти смену, заполни форму:\nhttps://docs.google.com/forms/d/e/1FAIpQLScwh1D5UKB2aCvkP4RikWPxGetB_JwO2_FnALGe5_IyimIubg/viewform")
     elif query.data == "job":
         await query.message.reply_text("Чтобы разместить смену, заполни форму:\nhttps://docs.google.com/forms/d/e/1FAIpQLSey3k8gent4eHEceU4CszmDj2SNr6UKKH7UqQPwiN2xlEyqkg/viewform")
     elif query.data == "сайт":
-        await query.message.reply_text("Заходи на наш сайт — там удобный подбор смен с процентом совпадения:\nВСТАВЬТЕ_СЮДА_ССЫЛКУ_НА_ВАШ_САЙТ")
+        await query.message.reply_text("Заходи на наш сайт — там удобный подбор смен с процентом совпадения:\nhttps://jol-ish-connect.lovable.app")
     elif query.data == "about":
-        await query.message.reply_text("JOL-Ish — сервис поиска сменной подработки в Бишкеке. Найди подходящую смену или размести вакансию.\n\nПодробнее на сайте:\nВСТАВЬТЕ_СЮДА_ПОЛНУЮ_ССЫЛКУ_ИЗ_ORIGINAL_ABOUT_ТЕКСТА
+        await query.message.reply_text("JOL-Ish — сервис поиска сменной подработки в Бишкеке. Найди подходящую смену или размести вакансию.\n\nПодробнее на сайте:\nhttps://sites.google.com/view/jol-ish-bishkek")
 
 app = Application.builder().token(TOKEN).build()
 app.add_handler(CommandHandler("start", start))
