@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JOL-Ish — Сменная подработка в Бишкеке</title>
+
+<style>
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f7f8fc;
+  color:#171923
+}
+.container{width:min(1100px,92%);margin:auto}
+
+header{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:white;
+  border-bottom:1px solid #eee
+}
+.nav{
+  height:70px;
+  display:flex;
+  align-items:center;
+  gap:25px
+}
+.logo{
+  font-size:25px;
+  font-weight:900;
+  color:#111;
+  text-decoration:none;
+  margin-right:auto
+}
+nav{display:flex;gap:20px}
+nav a{
+  color:#555;
+  text-decoration:none;
+  font-size:14px
+}
+.controls{
+  display:flex;
+  gap:8px;
+  align-items:center
+}
+#language{
+  padding:9px;
+  border:1px solid #ddd;
+  border-radius:9px;
+  background:white
+}
+.voice-small{
+  border:0;
+  background:#111827;
+  color:white;
+  width:40px;
+  height:40px;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:18px
+}
+
+.hero{
+  padding:85px 0;
+  background:linear-gradient(135deg,#eef2ff,#ecfdf5)
+}
+.hero-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:60px;
+  align-items:center
+}
+.badge{
+  color:#6366f1;
+  font-size:13px;
+  font-weight:bold;
+  text-transform:uppercase
+}
+h1{
+  font-size:clamp(45px,6vw,72px);
+  line-height:1;
+  margin:15px 0 25px
+}
+h1 span{color:#6366f1}
+.hero p{
+  color:#555;
+  font-size:19px;
+  line-height:1.6
+}
+.buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin:30px 0
+}
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:14px 20px;
+  border-radius:12px;
+  font-weight:bold;
+  text-decoration:none;
+  border:0;
+  cursor:pointer
+}
+.primary{background:#111827;color:white}
+.secondary{background:white;color:#111827;border:1px solid #ddd}
+
+.demo{
+  background:white;
+  padding:28px;
+  border-radius:25px;
+  box-shadow:0 20px 60px #0002;
+  position:relative
+}
+.match{
+  position:absolute;
+  right:20px;
+  top:20px;
+  background:#ecfdf5;
+  color:#047857;
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:bold
+}
+.demo-icon{
+  font-size:40px;
+  background:#f3f4f6;
+  width:65px;
+  height:65px;
+  display:grid;
+  place-items:center;
+  border-radius:18px
+}
+.demo h2{margin-top:20px}
+.demo p{color:#777}
+.price{
+  border-top:1px solid #eee;
+  margin-top:20px;
+  padding-top:18px;
+  display:flex;
+  justify-content:space-between;
+  font-weight:bold
+}
+
+section{padding:75px 0}
+.section-title{
+  font-size:40px;
+  margin:10px 0 30px
+}
+.filters{
+  background:white;
+  padding:20px;
+  border:1px solid #e5e7eb;
+  border-radius:18px;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:15px
+}
+label{
+  font-size:13px;
+  color:#666;
+  font-weight:bold
+}
+select,input{
+  width:100%;
+  margin-top:8px;
+  padding:12px;
+  border:1px solid #ddd;
+  border-radius:10px;
+  background:white
+}
+.jobs{
+  display:grid;
+  gap:12px;
+  margin-top:20px
+}
+.job{
+  background:white;
+  padding:20px;
+  border:1px solid #eee;
+  border-radius:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+.job-left{
+  display:flex;
+  gap:14px;
+  align-items:center
+}
+.icon{
+  width:45px;
+  height:45px;
+  border-radius:12px;
+  background:#f3f4f6;
+  display:grid;
+  place-items:center;
+  font-size:20px
+}
+.job h3{margin:0 0 6px}
+.job p{margin:0;color:#777;font-size:13px}
+
+.steps{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px
+}
+.step{
+  background:white;
+  padding:25px;
+  border-radius:18px;
+  border:1px solid #eee
+}
+.step-number{
+  color:#6366f1;
+  font-weight:bold
+}
+.step p{color:#666;line-height:1.5}
+
+.ai{
+  background:#111827;
+  color:white
+}
+.ai-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center
+}
+.ai p{color:#cbd5e1;line-height:1.6}
+.score{
+  font-size:65px;
+  font-weight:900
+}
+.score small{
+  display:block;
+  font-size:12px;
+  color:#aaa
+}
+
+.employer{
+  background:#eef2ff;
+  border-radius:22px;
+  padding:40px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px
+}
+.employer p{color:#666}
+
+footer{
+  background:white;
+  border-top:1px solid #eee;
+  padding:25px 0
+}
+.footer{
+  display:flex;
+  justify-content:space-between;
+  color:#666
+}
+
+/* Голосовой помощник */
+.voice-panel{
+  display:none;
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:100;
+  width:min(390px,calc(100% - 40px));
+  background:white;
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 20px 70px #0004;
+  border:1px solid #ddd
+}
+.voice-panel.active{display:block}
+.close{
+  position:absolute;
+  right:15px;
+  top:10px;
+  background:none;
+  border:0;
+  font-size:28px;
+  cursor:pointer
+}
+.mic{
+  text-align:center;
+  font-size:50px
+}
+.voice-panel h2{text-align:center}
+.voice-panel p{
+  text-align:center;
+  color:#666;
+  line-height:1.5
+}
+.listen{
+  width:100%;
+  font-size:16px
+}
+.answer{
+  margin-top:15px;
+  background:#f3f4f6;
+  padding:15px;
+  border-radius:12px;
+  min-height:45px
+}
+
+@media(max-width:800px){
+  nav{display:none}
+  .hero-grid{grid-template-columns:1fr}
+  .filters{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr}
+  .ai-box,.employer{display:block}
+  .score{margin-top:25px}
+}
+@media(max-width:500px){
+  .filters{grid-template-columns:1fr}
+  h1{font-size:48px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+
+<a class="logo" href="#">JOL-Ish</a>
+
+<nav>
+<a href="#find" data-t="find">Найти смену</a>
+<a href="#how" data-t="how">Как это работает</a>
+<a href="#employers" data-t="employers">Работодателям</a>
+</nav>
+
+<div class="controls">
+
+<select id="language">
+<option value="ru">🇷🇺 Русский</option>
+<option value="ky">🇰🇬 Кыргызча</option>
+<option value="en">🇬🇧 English</option>
+</select>
+
+<button class="voice-small" onclick="openVoice()">🎙️</button>
+
+</div>
+</div>
+</header>
+
+<main>
+
+<section class="hero">
+<div class="container hero-grid">
+
+<div>
+
+<div class="badge" data-t="badge">
+Сменная подработка в Бишкеке
+</div>
+
+<h1 data-t="title">
+Найди смену.<br>
+<span>Заработай сегодня.</span>
+</h1>
+
+<p data-t="hero">
+Сменная подработка рядом с домом — быстро, удобно и без лишних звонков.
+</p>
+
+<div class="buttons">
+
+<a href="#find" class="btn primary" data-t="findShift">
+🔍 Найти смену
+</a>
+
+<a
+href="https://docs.google.com/forms/d/e/1FAIpQLSey3k8gent4eHEceU4CszmDj2SNr6UKKH7UqQPwiN2xlEyqkg/viewform"
+target="_blank"
+class="btn secondary"
+data-t="post">
+➕ Разместить вакансию
+</a>
+
+</div>
+
+</div>
+
+<div class="demo">
+
+<div class="match">96% MATCH</div>
+
+<div class="demo-icon">💼</div>
+
+<h2 data-t="cashier">Кассир</h2>
+
+<p>📍 Аламедин-1</p>
+<p>🕑 14:00–22:00 • Сегодня</p>
+
+<div class="price">
+<span>2 500 сом</span>
+<span>1.8 km</span>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section id="find">
+
+<div class="container">
+
+<div class="badge">JOL-Ish</div>
+
+<h2 class="section-title" data-t="findTitle">
+Найди подходящую смену
+</h2>
+
+<div class="filters">
+
+<label>
+<span data-t="work">Работа</span>
+<select>
+<option>Любая</option>
+<option>Кассир</option>
+<option>Официант</option>
+<option>Продавец</option>
+<option>Работник склада</option>
+</select>
+</label>
+
+<label>
+<span data-t="district">Район</span>
+<select>
+<option>Любой район</option>
+<option>Аламедин-1</option>
+<option>Центр</option>
+<option>Джал</option>
+<option>Ошский рынок</option>
+</select>
+</label>
+
+<label>
+<span data-t="date">Дата</span>
+<input type="date">
+</label>
+
+<label>
+<span data-t="pay">Минимальная оплата</span>
+<input type="number" value="1500">
+</label>
+
+</div>
+
+<div class="jobs">
+
+<div class="job">
+<div class="job-left">
+<div class="icon">🧾</div>
+<div>
+<h3>Кассир</h3>
+<p>Аламедин-1 • Сегодня • 14:00–22:00</p>
+</div>
+</div>
+<strong>2 500 сом</strong>
+</div>
+
+<div class="job">
+<div class="job-left">
+<div class="icon">🍽️</div>
+<div>
+<h3>Официант</h3>
+<p>Центр • Сегодня • 17:00–23:00</p>
+</div>
+</div>
+<strong>2 200 сом</strong>
+</div>
+
+<div class="job">
+<div class="job-left">
+<div class="icon">📦</div>
+<div>
+<h3>Работник склада</h3>
+<p>Ошский рынок • Завтра • 09:00–18:00</p>
+</div>
+</div>
+<strong>3 000 сом</strong>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section id="how">
+
+<div class="container">
+
+<div class="badge">3 ШАГА</div>
+
+<h2 class="section-title" data-t="howTitle">
+Как это работает
+</h2>
+
+<div class="steps">
+
+<div class="step">
+<div class="step-number">01</div>
+<h3 data-t="step1">Выбираешь смену</h3>
+<p data-t="step1p">Район, дата, время и подходящая работа.</p>
+</div>
+
+<div class="step">
+<div class="step-number">02</div>
+<h3 data-t="step2">Оставляешь заявку</h3>
+<p data-t="step2p">Заполняешь короткую форму без лишних звонков.</p>
+</div>
+
+<div class="step">
+<div class="step-number">03</div>
+<h3 data-t="step3">Выходишь на работу</h3>
+<p data-t="step3p">Получаешь фиксированную оплату за смену.</p>
+</div>
+
+</div>
+
+</div>
+</section>
+
+<section class="ai">
+
+<div class="container ai-box">
+
+<div>
+
+<div class="badge">AI</div>
+
+<h2 data-t="aiTitle">
+Умный подбор смен
+</h2>
+
+<p data-t="aiText">
+JOL-Ish помогает подобрать смену по району, времени и оплате.
+</p>
+
+</div>
+
+<div class="score">
+96%
+<small data-t="match">совпадение</small>
+</div>
+
+</div>
+</section>
+
+<section id="employers">
+
+<div class="container">
+
+<div class="employer">
+
+<div>
+
+<div class="badge">JOL-Ish</div>
+
+<h2 data-t="empTitle">
+Есть свободная смена?
+</h2>
+
+<p data-t="empText">
+Размести вакансию и найди сотрудника на нужный день.
+</p>
+
+</div>
+
+<a
+class="btn primary"
+target="_blank"
+href="https://docs.google.com/forms/d/e/1FAIpQLSey3k8gent4eHEceU4CszmDj2SNr6UKKH7UqQPwiN2xlEyqkg/viewform"
+data-t="post">
+➕ Разместить вакансию
+</a>
+
+</div>
+
+</div>
+</section>
+
+</main>
+
+<footer>
+
+<div class="container footer">
+
+<strong>JOL-Ish</strong>
+
+<span data-t="footer">
+Сменная подработка в Бишкеке
+</span>
+
+</div>
+
+</footer>
+
+<!-- ГОЛОСОВОЙ ПОМОЩНИК -->
+
+<div class="voice-panel" id="voicePanel">
+
+<button class="close" onclick="closeVoice()">×</button>
+
+<div class="mic">🎙️</div>
+
+<h2 data-t="voiceTitle">
+Голосовой помощник
+</h2>
+
+<p id="voiceStatus" data-t="voiceHint">
+Нажми кнопку и скажи, что тебе нужно.
+</p>
+
+<button class="btn primary listen" onclick="listen()">
+🎙️ <span data-t="speak">Говорить</span>
+</button>
+
+<div class="answer" id="answer"></div>
+
+</div>
+
+<script>
+
+const translations={
+
+ru:{
+find:"Найти смену",
+how:"Как это работает",
+employers:"Работодателям",
+badge:"Сменная подработка в Бишкеке",
+title:"Найди смену. Заработай сегодня.",
+hero:"Сменная подработка рядом с домом — быстро, удобно и без лишних звонков.",
+findShift:"🔍 Найти смену",
+post:"➕ Разместить вакансию",
+cashier:"Кассир",
+findTitle:"Найди подходящую смену",
+work:"Работа",
+district:"Район",
+date:"Дата",
+pay:"Минимальная оплата",
+howTitle:"Как это работает",
+step1:"Выбираешь смену",
+step1p:"Район, дата, время и подходящая работа.",
+step2:"Оставляешь заявку",
+step2p:"Заполняешь короткую форму без лишних звонков.",
+step3:"Выходишь на работу",
+step3p:"Получаешь фиксированную оплату за смену.",
+aiTitle:"Умный подбор смен",
+aiText:"JOL-Ish помогает подобрать смену по району, времени и оплате.",
+match:"совпадение",
+empTitle:"Есть свободная смена?",
+empText:"Размести вакансию и найди сотрудника на нужный день.",
+voiceTitle:"Голосовой помощник",
+voiceHint:"Нажми кнопку и скажи, что тебе нужно.",
+speak:"Говорить",
+footer:"Сменная подработка в Бишкеке"
+},
+
+ky:{
+find:"Сменаны табуу",
+how:"Кантип иштейт",
+employers:"Иш берүүчүлөргө",
+badge:"Бишкектеги сменалык жумуш",
+title:"Сменаны тап. Бүгүн акча тап.",
+hero:"Үйүңө жакын сменалык жумуш — тез, ыңгайлуу жана ашыкча чалуусуз.",
+findShift:"🔍 Сменаны табуу",
+post:"➕ Вакансия жайгаштыруу",
+cashier:"Кассир",
+findTitle:"Өзүңө ылайыктуу сменаны тап",
+work:"Жумуш",
+district:"Район",
+date:"Күнү",
+pay:"Минималдуу төлөм",
+howTitle:"Кантип иштейт",
+step1:"Сменаны тандайсың",
+step1p:"Район, күн, убакыт жана ылайыктуу жумуш.",
+step2:"Арыз калтырасың",
+step2p:"Кыска форманы толтурасың.",
+step3:"Жумушка чыгасың",
+step3p:"Смена үчүн белгиленген төлөмдү аласың.",
+aiTitle:"Акылдуу смена тандоо",
+aiText:"JOL-Ish район, убакыт жана төлөм боюнча сменаны тандоого жардам берет.",
+match:"дал келүү",
+empTitle:"Бош смена барбы?",
+empText:"Вакансияны жайгаштырып, керектүү күнгө кызматкер тап.",
+voiceTitle:"Үн жардамчысы",
+voiceHint:"Баскычты басып, эмне керек экенин айт.",
+speak:"Сүйлөө",
+footer:"Бишкектеги сменалык жумуш"
+},
+
+en:{
+find:"Find a shift",
+how:"How it works",
+employers:"For employers",
+badge:"Shift work in Bishkek",
+title:"Find a shift. Earn today.",
+hero:"Part-time shifts near your home — fast, convenient and without unnecessary calls.",
+findShift:"🔍 Find a shift",
+post:"➕ Post a vacancy",
+cashier:"Cashier",
+findTitle:"Find the right shift",
+work:"Job",
+district:"District",
+date:"Date",
+pay:"Minimum pay",
+howTitle:"How it works",
+step1:"Choose a shift",
+step1p:"Pick a district, date, time and job.",
+step2:"Send a request",
+step2p:"Fill out a short form without unnecessary calls.",
+step3:"Start working",
+step3p:"Get the fixed payment for your shift.",
+aiTitle:"Smart shift matching",
+aiText:"JOL-Ish helps match shifts by district, time and pay.",
+match:"match",
+empTitle:"Have an open shift?",
+empText:"Post a vacancy and find a worker for the right day.",
+voiceTitle:"Voice assistant",
+voiceHint:"Press the button and tell me what you need.",
+speak:"Speak",
+footer:"Shift work in Bishkek"
+}
+
+};
+
+let currentLang="ru";
+
+const language=document.getElementById("language");
+
+language.addEventListener("change",function(){
+
+currentLang=this.value;
+
+document.querySelectorAll("[data-t]").forEach(el=>{
+
+const key=el.dataset.t;
+
+if(translations[currentLang][key]){
+el.textContent=translations[currentLang][key];
+}
+
+});
+
+});
+
+function openVoice(){
+
+document.getElementById("voicePanel").classList.add("active");
+
+}
+
+function closeVoice(){
+
+document.getElementById("voicePanel").classList.remove("active");
+
+}
+
+function speak(text){
+
+if(!window.speechSynthesis)return;
+
+const speech=new SpeechSynthesisUtterance(text);
+
+speech.lang=
+currentLang==="ru"?"ru-RU":
+currentLang==="ky"?"ky-KG":
+"en-US";
+
+speechSynthesis.cancel();
+
+speechSynthesis.speak(speech);
+
+}
+
+function listen(){
+
+const Recognition=
+window.SpeechRecognition ||
+window.webkitSpeechRecognition;
+
+if(!Recognition){
+
+const message=
+currentLang==="en"
+?"Voice recognition is not supported. Please use Chrome or Edge."
+:
+currentLang==="ky"
+?"Бул браузерде үн таануу колдоого алынбайт. Chrome же Edge колдонуңуз."
+:
+"В этом браузере голосовое распознавание не поддерживается. Используй Chrome или Edge.";
+
+document.getElementById("voiceStatus").textContent=message;
+
+speak(message);
+
+return;
+
+}
+
+const recognition=new Recognition();
+
+recognition.lang=
+currentLang==="ru"?"ru-RU":
+currentLang==="ky"?"ky-KG":
+"en-US";
+
+recognition.interimResults=false;
+recognition.continuous=false;
+
+document.getElementById("voiceStatus").textContent=
+currentLang==="en"?"Listening…":
+currentLang==="ky"?"Угуп жатам…":
+"Слушаю…";
+
+recognition.start();
+
+recognition.onresult=function(event){
+
+const text=event.results[0][0].transcript;
+
+document.getElementById("voiceStatus").textContent=text;
+
+let answer="";
+
+const q=text.toLowerCase();
+
+if(currentLang==="ru"){
+
+if(q.includes("смен")||q.includes("найти")||q.includes("работ")){
+
+answer="Открываю поиск смен. Здесь ты можешь выбрать работу, район и дату.";
+
+document.getElementById("find").scrollIntoView({behavior:"smooth"});
+
+}else if(q.includes("ваканс")||q.includes("размест")){
+
+answer="Чтобы разместить вакансию, нажми кнопку «Разместить вакансию».";
+
+}else{
+
+answer="Я услышал: «"+text+"». Попробуй сказать: «найти смену» или «разместить вакансию».";
+
+}
+
+}
+
+else if(currentLang==="ky"){
+
+if(q.includes("смен")||q.includes("жумуш")||q.includes("тап")){
+
+answer="Сменаларды издөө бөлүмүн ачтым. Жумушту, районду жана күндү танда.";
+
+document.getElementById("find").scrollIntoView({behavior:"smooth"});
+
+}else if(q.includes("ваканс")){
+
+answer="Вакансия жайгаштыруу үчүн тиешелүү баскычты бас.";
+
+}else{
+
+answer="Сөзүңүздү уктум: «"+text+"». «Сменаны тап» деп айтып көрүңүз.";
+
+}
+
+}
+
+else{
+
+if(q.includes("shift")||q.includes("find")||q.includes("job")){
+
+answer="Opening shift search. Choose a job, district and date.";
+
+document.getElementById("find").scrollIntoView({behavior:"smooth"});
+
+}else if(q.includes("vacancy")||q.includes("post")){
+
+answer="Use the Post a vacancy button to publish a shift.";
+
+}else{
+
+answer='I heard: "'+text+'". Try saying "find a shift" or "post a vacancy".';
+
+}
+
+}
+
+document.getElementById("answer").textContent=answer;
+
+speak(answer);
+
+};
+
+recognition.onerror=function(){
+
+document.getElementById("voiceStatus").textContent=
+currentLang==="en"?"Try speaking again.":
+currentLang==="ky"?"Кайра аракет кылып көрүңүз.":
+"Не удалось распознать речь. Попробуй ещё раз.";
+
+};
+
+}
+
+</script>
